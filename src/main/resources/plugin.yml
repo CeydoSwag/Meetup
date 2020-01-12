@@ -1,0 +1,4 @@
+name: Com.emptyirony.meetup
+version: ${project.version}
+main: kuro.com.emptyirony.meetup.Com.emptyirony.meetup
+api-version: 1.13
