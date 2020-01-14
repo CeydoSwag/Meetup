@@ -47,10 +47,6 @@ public class PlayerListener implements Listener {
             HotBar.giveMainHotBar(player);
             String username = Profile.getByUuid(player.getUniqueId()).getColoredUsername();
             event.setJoinMessage(CC.translate(username+"&e joined the game(&a"+ Bukkit.getOnlinePlayers().size()+"&7/&c30&e)"));
-
-            if (Bukkit.getOnlinePlayers().size()>=5){
-
-            }
         }else {
             if (!game.getAlivePlayer().contains(player.getUniqueId())){
                 PlayerUtil.reset(player);

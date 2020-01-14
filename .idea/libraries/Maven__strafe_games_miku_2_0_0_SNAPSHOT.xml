@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Maven: strafe.games:miku:2.0.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/strafe/games/Miku/2.0.0-SNAPSHOT/miku-2.0.0-SNAPSHOT.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/strafe/games/miku/2.0.0-SNAPSHOT/miku-2.0.0-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/strafe/games/miku/2.0.0-SNAPSHOT/miku-2.0.0-SNAPSHOT-javadoc.jar!/" />

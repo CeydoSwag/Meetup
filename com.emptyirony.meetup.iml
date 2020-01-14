@@ -15,5 +15,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: strafe.games:chika-server:1.8.8-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: strafe.games:miku:2.0.0-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.16" level="project" />
+    <orderEntry type="library" name="miku-2.0.0-SNAPSHOT" level="project" />
   </component>
 </module>
