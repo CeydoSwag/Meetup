@@ -46,7 +46,7 @@ public class Tab implements ZigguratAdapter {
     }
 
     private Set<BufferedTabObject> getWaitingTab(Player player) {
-        final Set<BufferedTabObject> tabObjects = new HashSet<>();
+        Set<BufferedTabObject> tabObjects = new HashSet<>();
         tabObjects.add(this.wrapObject(2, "&fOnline: " + Bukkit.getOnlinePlayers().size()));
         tabObjects.add(this.wrapObject(22, player.getPing(), "&fYour Connection"));
         tabObjects.add(this.wrapObject(42, "&fNeed Players: " + KuRo.getIns().getGame().getMinmumPlayer()));
@@ -57,7 +57,7 @@ public class Tab implements ZigguratAdapter {
     }
 
     private Set<BufferedTabObject> getStartingTab(Player player) {
-        final Set<BufferedTabObject> tabObjects = new HashSet<>();
+        Set<BufferedTabObject> tabObjects = new HashSet<>();
         tabObjects.add(this.wrapObject(2, "&fOnline: " + Bukkit.getOnlinePlayers().size()));
         tabObjects.add(this.wrapObject(22, player.getPing(), "&fYour Connection"));
         tabObjects.add(this.wrapObject(42, "&fStarts in: " + TextUtil.secondsToString(KuRo.getIns().getGame().getStartCountdown())));
@@ -68,7 +68,7 @@ public class Tab implements ZigguratAdapter {
     }
 
     private Set<BufferedTabObject> getFightingTab(Player player) {
-        final Set<BufferedTabObject> tabObjects = new HashSet<>();
+        Set<BufferedTabObject> tabObjects = new HashSet<>();
         tabObjects.add(this.wrapObject(2, "&fOnline: " + Bukkit.getOnlinePlayers().size()));
         tabObjects.add(this.wrapObject(22, player.getPing(), "&fYour Connection"));
         tabObjects.add(this.wrapObject(42, "&fRemaining: " + KuRo.getIns().getGame().getAlivePlayer()));
