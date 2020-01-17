@@ -2,18 +2,19 @@ package com.emptyirony.meetup.object;
 
 import com.emptyirony.meetup.KuRo;
 import com.emptyirony.meetup.manager.HotBar;
+import com.emptyirony.meetup.util.SitUtil;
 import com.emptyirony.meetup.util.TextUtil;
 import lombok.Data;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import strafe.games.miku.util.CC;
 import strafe.games.miku.util.PlayerUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * 2 * @Author: EmptyIrony
@@ -32,6 +33,7 @@ public class Game {
     private int minmumPlayer;
     private Player winner;
     private int startCountdown;
+    private List<Kit> kits;
 
     public Game(KuRo kuRo) {
         this.kuro = kuRo;
@@ -41,6 +43,7 @@ public class Game {
         this.enableScenarios = new ArrayList<>();
         this.minmumPlayer = 3;
         this.winner = null;
+        kits = new ArrayList<>();
     }
 
     public boolean canStart() {
@@ -86,6 +89,47 @@ public class Game {
 
     }
 
+    public void scatter() {
+        Queue<Player> playerQueue = new LinkedList<>(Bukkit.getOnlinePlayers());
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Random random = new Random();
+                int x;
+                int z;
+                int y;
+                SitUtil sit = KuRo.getIns().getSit();
+                Player player = playerQueue.poll();
+                if (player == null) {
+                    return;
+                }
+
+                if (random.nextBoolean()) {
+                    x = random.nextInt(border - 5);
+                } else {
+                    x = -(random.nextInt(border - 5));
+                }
+                if (random.nextBoolean()) {
+                    z = random.nextInt(border - 5);
+                } else {
+                    z = -(random.nextInt(border - 5));
+                }
+
+                y = world.getHighestBlockAt(x, z).getY() + 2;
+
+                player.teleport(new Location(world, x, y, z));
+                sit.sitPlayer(player);
+
+                if (playerQueue.size() == 0) {
+                    cancel();
+                    addKit();
+                }
+
+            }
+        }.runTaskTimer(KuRo.getIns(), 20, 5);
+    }
+
     public void startCountdown() {
         this.startCountdown = 60;
         this.status = GameStatus.STARTING;
@@ -103,15 +147,28 @@ public class Game {
             return;
         }
         if (this.startCountdown > 0) {
-            if (this.startCountdown == 60 || this.startCountdown == 30 || this.startCountdown == 15 || this.startCountdown == 10 || this.startCountdown <=5 && this.startCountdown>1){
-                Bukkit.broadcastMessage(CC.translate("&eThe game will be start in &b"+this.startCountdown+"&e seconds"));
-                Bukkit.getOnlinePlayers().forEach(player-> player.playSound(player.getLocation(), Sound.NOTE_PLING,1,1));
+            if (this.startCountdown == 60 || this.startCountdown == 30 || this.startCountdown == 15 || this.startCountdown == 10 || this.startCountdown <= 5 && this.startCountdown > 1) {
+                Bukkit.broadcastMessage(CC.translate("&eThe game will be start in &b" + this.startCountdown + "&e seconds"));
+                Bukkit.getOnlinePlayers().forEach(player -> player.playSound(player.getLocation(), Sound.NOTE_PLING, 1, 1));
             }
             --this.startCountdown;
             Bukkit.getOnlinePlayers().forEach(player -> {
                 player.setLevel(this.startCountdown);
                 player.setExp(this.startCountdown * 1000 / 60000.0f);
             });
+        } else {
+            Bukkit.getOnlinePlayers().forEach(player -> {
+                alivePlayer.add(player.getUniqueId());
+            });
+
+            scatter();
+        }
+    }
+
+    public void addKit() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+
         }
     }
 

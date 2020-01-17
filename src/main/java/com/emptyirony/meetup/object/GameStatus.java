@@ -10,6 +10,5 @@ public enum GameStatus {
     STARTING,
     TELEPORTING,
     GAMING,
-    ENDING,
     END
 }

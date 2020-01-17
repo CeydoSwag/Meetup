@@ -21,12 +21,6 @@ public class GameRunnable extends TimerTask {
     public void run(){
         Game game = this.plugin.getGame();
         switch (game.getStatus()){
-            case WAITING:{
-                if (!game.canStart()){
-                    break;
-                }
-                game.startCountdown();
-            }
             case STARTING:{
                 game.loopCountdown();
             }
